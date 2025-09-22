@@ -105,3 +105,4 @@ fabric.properties
 **/caddy
 frankenphp
 frankenphp-worker.php
+/config/psysh/psysh_history
