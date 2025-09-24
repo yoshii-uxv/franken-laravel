@@ -28,14 +28,21 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Install Node Dependencies
-        run: npm install
+      - name: Dependency restore
+        id: node-cache
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: node-deps-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+      - name: Dependency installing
+        if: steps.node-cache.outputs.cache-hit != 'true'
+        run: npm ci
 
       - name: Build Assets
         run: npm run build
 
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: npx playwright install chromium --with-deps
 
       - name: Install Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
