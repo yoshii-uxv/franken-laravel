@@ -148,6 +148,18 @@ kill <PID>
 
 - **Binary Size**: ~69MB (includes PHP 8.4.12, FrankenPHP v1.9.1, Caddy v2.10.2)
 - **Runtime**: Go-based server with embedded PHP and Laravel application
+- **PHP Extensions**: Includes essential Laravel extensions (fileinfo, iconv, mbstring, openssl, etc.)
 - **Storage**: Auto-configuring file system paths for logs, cache, and sessions
 - **Assets**: Pre-compiled Vite assets with Tailwind CSS v4
 - **Performance**: All Laravel caches pre-built for maximum speed
+
+### 🧩 Included PHP Extensions
+
+The static binary includes PHP extensions required by Laravel:
+- **fileinfo**: File type detection and MIME type operations
+- **iconv**: Character encoding conversion
+- **mbstring**: Multi-byte string operations
+- **openssl**: SSL/TLS encryption and certificates
+- **Other core extensions**: ctype, curl, dom, session, tokenizer, xml, etc.
+
+During the build process, Composer temporarily ignores platform requirements for these extensions since they're embedded in the final binary but not available during the Docker build stage.

@@ -12,7 +12,7 @@ RUN npm ci --cache /tmp/empty-cache
 COPY . .
 RUN npm run build
 
-# Main stage: FrankenPHP static builder
+# Main stage: FrankenPHP static builder with required extensions
 FROM --platform=linux/amd64 dunglas/frankenphp:static-builder
 
 # Copy the Laravel application
@@ -24,7 +24,9 @@ COPY --from=node-builder /app/public/build /go/src/app/dist/app/public/build
 # Set working directory
 WORKDIR /go/src/app/dist/app
 
-# Install PHP dependencies (production only) - ignore platform requirements for extensions
+# Install PHP dependencies (production only)
+# The FrankenPHP static builder will build the binary with necessary PHP extensions
+# but Composer doesn't know about them during build time, so we ignore platform requirements
 RUN composer install --no-dev --optimize-autoloader --no-scripts \
     --ignore-platform-req=ext-fileinfo \
     --ignore-platform-req=ext-iconv
