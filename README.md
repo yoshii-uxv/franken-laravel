@@ -81,3 +81,73 @@ flowchart TB
 ### 🔧 Previous Issue Fixed:
 - ❌ **Before**: FrankenPHP tried to bind to port 4410 inside container
 - ✅ **After**: FrankenPHP binds to port 80, Docker maps 4410:80
+
+## 📦 Standalone Binary
+
+This project supports building a completely self-contained executable binary using FrankenPHP's static builder. The binary includes PHP runtime, web server, and your entire Laravel application in a single 69MB file.
+
+### 🏗️ Building the Binary
+
+```bash
+# Build standalone binary (creates ./franken-laravel)
+composer build:static
+```
+
+This command:
+- Uses Docker multi-stage build with FrankenPHP static builder
+- Compiles and optimizes your Laravel application
+- Builds frontend assets with Vite + Tailwind CSS v4
+- Creates all necessary Laravel caches (config, routes, views)
+- Produces a single executable file with zero dependencies
+
+### 🚀 Running the Binary
+
+```bash
+# Basic usage - serves on localhost:8000
+./franken-laravel php-server --listen :8000 --root public
+
+# Listen on all interfaces (accessible from other machines)
+./franken-laravel php-server --listen 0.0.0.0:8000 --root public
+
+# Custom port
+./franken-laravel php-server --listen :3000 --root public
+```
+
+### ⚙️ Storage Configuration
+
+The binary automatically creates storage directories in `/tmp/laravel-storage`. For custom storage:
+
+```bash
+# Set custom storage path
+export LARAVEL_STORAGE_PATH=/custom/storage/path
+./franken-laravel php-server --listen :8000 --root public
+```
+
+### 🛑 Stopping the Binary
+
+```bash
+# Find the process
+ps aux | grep franken-laravel
+
+# Kill by process ID
+kill <PID>
+
+# Or use Ctrl+C if running in foreground
+```
+
+### ✨ Binary Benefits
+
+- **Zero Dependencies**: No PHP, Composer, or web server installation required
+- **Single File**: Distribute your entire Laravel app as one executable
+- **High Performance**: FrankenPHP worker mode provides 80% faster response times
+- **Modern Protocol Support**: HTTP/2, HTTP/3, and advanced compression
+- **Cross-Platform**: Build for different architectures using Docker
+- **Edge Deployment**: Perfect for containerless deployment scenarios
+
+### 📊 Technical Details
+
+- **Binary Size**: ~69MB (includes PHP 8.4.12, FrankenPHP v1.9.1, Caddy v2.10.2)
+- **Runtime**: Go-based server with embedded PHP and Laravel application
+- **Storage**: Auto-configuring file system paths for logs, cache, and sessions
+- **Assets**: Pre-compiled Vite assets with Tailwind CSS v4
+- **Performance**: All Laravel caches pre-built for maximum speed

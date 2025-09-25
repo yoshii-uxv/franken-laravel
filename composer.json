@@ -80,7 +80,8 @@
             "@test:unit",
             "@test:lint",
             "@test:types"
-        ]
+        ],
+        "build:static": "./build-binary.sh"
     },
     "extra": {
         "laravel": {

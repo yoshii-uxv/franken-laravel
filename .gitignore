@@ -106,3 +106,4 @@ fabric.properties
 frankenphp
 frankenphp-worker.php
 /config/psysh/psysh_history
+/franken-laravel
