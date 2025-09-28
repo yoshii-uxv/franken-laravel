@@ -16,6 +16,7 @@
         "nunomaduro/essentials": "^1.0.1"
     },
     "require-dev": {
+        "driftingly/rector-laravel": "^2.0.7",
         "fakerphp/faker": "^1.24.1",
         "larastan/larastan": "^3.7.2",
         "laravel/boost": "^1.2.1",
@@ -52,7 +53,9 @@
             "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+            "@php artisan clear",
+            "@update:requirements"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
@@ -62,15 +65,19 @@
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
         ],
+        "update:requirements": [
+            "composer bump",
+            "npx npm-check-updates -u"
+        ],
         "lint": [
-            "pint",
             "rector",
+            "pint --parallel",
             "npm run lint"
         ],
         "test:type-coverage": "pest --type-coverage --min=100",
         "test:lint": [
-            "pint --test",
             "rector --dry-run",
+            "pint  --parallel --test",
             "npm run test:lint"
         ],
         "test:unit": "pest --parallel --coverage --exactly=100.0",

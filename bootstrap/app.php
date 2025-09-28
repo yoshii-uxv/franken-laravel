@@ -19,8 +19,10 @@ $app = Application::configure(basePath: dirname(__DIR__))
     })->create();
 
 // Configure storage path for embedded FrankenPHP binary
-$storagePath = $_ENV['LARAVEL_STORAGE_PATH'] ?? getenv('LARAVEL_STORAGE_PATH') ?? '/tmp/laravel-storage';
-if ($storagePath) {
+$storagePath = array_key_exists('LARAVEL_STORAGE_PATH', $_ENV)
+    ? $_ENV['LARAVEL_STORAGE_PATH']
+    : (getenv('LARAVEL_STORAGE_PATH') ?: '/tmp/laravel-storage');
+if ($storagePath && is_string($storagePath)) {
     // Ensure the storage path exists
     if (! is_dir($storagePath)) {
         @mkdir($storagePath, 0755, true);
