@@ -20,7 +20,7 @@ $app = Application::configure(basePath: dirname(__DIR__))
 
 // Configure storage path for embedded FrankenPHP binary
 $storagePath = array_key_exists('LARAVEL_STORAGE_PATH', $_ENV)
-    ? $_ENV['LARAVEL_STORAGE_PATH']
+    ? Illuminate\Support\Env::get('LARAVEL_STORAGE_PATH')
     : (getenv('LARAVEL_STORAGE_PATH') ?: '/tmp/laravel-storage');
 if ($storagePath && is_string($storagePath)) {
     // Ensure the storage path exists
@@ -29,8 +29,7 @@ if ($storagePath && is_string($storagePath)) {
     }
 
     // Set up required subdirectories
-    $subdirs = ['logs', 'framework/cache', 'framework/sessions', 'framework/views', 'app'];
-    foreach ($subdirs as $subdir) {
+    foreach (['logs', 'framework/cache', 'framework/sessions', 'framework/views', 'app'] as $subdir) {
         $fullPath = $storagePath.'/'.$subdir;
         if (! is_dir($fullPath)) {
             @mkdir($fullPath, 0755, true);
