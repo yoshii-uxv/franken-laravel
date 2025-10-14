@@ -1,4 +1,115 @@
-# Laravel Sail + Octane + FrankenPHP Configuration Diagram
+# Laravel Sail + Octane + FrankenPHP
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Docker Desktop installed and running
+- Git
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd franken-laravel
+   ```
+
+2. **Install Composer dependencies**
+   ```bash
+   docker run --rm \
+       -u "$(id -u):$(id -g)" \
+       -v "$(pwd):/var/www/html" \
+       -w /var/www/html \
+       laravelsail/php84-composer:latest \
+       composer install --ignore-platform-reqs
+   ```
+
+3. **Copy environment file**
+   ```bash
+   cp .env.example .env
+   ```
+
+4. **Start Laravel Sail**
+   ```bash
+   ./vendor/bin/sail up -d
+   ```
+
+5. **Generate application key**
+   ```bash
+   ./vendor/bin/sail artisan key:generate
+   ```
+
+6. **Run database migrations**
+   ```bash
+   ./vendor/bin/sail artisan migrate
+   ```
+
+7. **Install NPM dependencies and build assets**
+   ```bash
+   ./vendor/bin/sail npm install
+   ./vendor/bin/sail npm run build
+   ```
+
+8. **Install Playwright for browser testing (optional)**
+   ```bash
+   # Install Playwright browsers
+   ./vendor/bin/sail npm install playwright@latest
+
+   # Install system dependencies as root
+   ./vendor/bin/sail root-shell
+   npx playwright install-deps
+   exit
+   ```
+
+   Note: These system dependencies won't persist after container rebuild. For permanent installation, customize the Dockerfile.
+
+9. **Access the application**
+   - Open your browser to `http://localhost:4410`
+
+### Development Commands
+
+```bash
+# Start containers
+./vendor/bin/sail up -d
+
+# Stop containers
+./vendor/bin/sail down
+
+# Watch and rebuild assets
+./vendor/bin/sail npm run dev
+
+# Access container shell
+./vendor/bin/sail shell
+
+# Access container as root
+./vendor/bin/sail root-shell
+```
+
+### Testing
+
+The project includes comprehensive testing scripts available through Composer:
+
+```bash
+# Run all tests (includes type coverage, unit tests, linting, and static analysis)
+./vendor/bin/sail composer test
+
+# Run unit tests with coverage (requires 100% coverage)
+./vendor/bin/sail composer test:unit
+
+# Check type coverage (requires 100% type coverage)
+./vendor/bin/sail composer test:type-coverage
+
+# Run static analysis with PHPStan
+./vendor/bin/sail composer test:types
+
+# Run linting checks (Rector + Pint + NPM linting)
+./vendor/bin/sail composer test:lint
+
+# Fix code style issues
+./vendor/bin/sail composer lint
+```
+
+## Configuration Diagram
 
 ```mermaid
 flowchart TB
