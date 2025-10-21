@@ -22,6 +22,9 @@ return RectorConfig::configure()
         __DIR__.'/public',
         __DIR__.'/routes',
     ])
+    ->withImportNames(
+        removeUnusedImports: true,
+    )
     ->withComposerBased(laravel: true)
     ->withSkip([
         AddOverrideAttributeToOverriddenMethodsRector::class,
