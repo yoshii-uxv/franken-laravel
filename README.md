@@ -109,6 +109,7 @@ The project includes comprehensive testing scripts available through Composer:
 ./vendor/bin/sail composer lint
 ```
 
+
 ## Configuration Diagram
 
 ```mermaid
