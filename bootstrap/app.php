@@ -30,8 +30,7 @@ if ($storagePath && is_string($storagePath)) {
     }
 
     // Set up required subdirectories
-    $subdirs = ['logs', 'framework/cache', 'framework/sessions', 'framework/views', 'app'];
-    foreach ($subdirs as $subdir) {
+    foreach (['logs', 'framework/cache', 'framework/sessions', 'framework/views', 'app'] as $subdir) {
         $fullPath = $storagePath.'/'.$subdir;
         if (! is_dir($fullPath)) {
             @mkdir($fullPath, 0755, true);
