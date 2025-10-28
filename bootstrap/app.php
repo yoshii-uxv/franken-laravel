@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Support\Env;
 
 $app = Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -20,7 +21,7 @@ $app = Application::configure(basePath: dirname(__DIR__))
 
 // Configure storage path for embedded FrankenPHP binary
 $storagePath = array_key_exists('LARAVEL_STORAGE_PATH', $_ENV)
-    ? $_ENV['LARAVEL_STORAGE_PATH']
+    ? Env::get('LARAVEL_STORAGE_PATH')
     : (getenv('LARAVEL_STORAGE_PATH') ?: '/tmp/laravel-storage');
 if ($storagePath && is_string($storagePath)) {
     // Ensure the storage path exists
