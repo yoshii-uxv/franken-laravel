@@ -1,7 +1,7 @@
 services:
     app:
         build:
-            context: './vendor/laravel/sail/runtimes/8.4'
+            context: './vendor/laravel/sail/runtimes/8.5'
             dockerfile: Dockerfile
             args:
                 WWWGROUP: '${WWWGROUP}'
