@@ -8,13 +8,13 @@
         "test:lint": "prettier --check resources/"
     },
     "devDependencies": {
-        "@tailwindcss/vite": "^4.1.17",
+        "@tailwindcss/vite": "^4.1.18",
         "laravel-vite-plugin": "^2.0.1",
         "prettier": "^3.7.4",
         "prettier-plugin-organize-imports": "^4.3.0",
         "prettier-plugin-tailwindcss": "^0.7.2",
-        "tailwindcss": "^4.1.17",
-        "vite": "^7.2.6"
+        "tailwindcss": "^4.1.18",
+        "vite": "^7.2.7"
     },
     "dependencies": {
         "playwright": "^1.57.0"
