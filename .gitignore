@@ -107,3 +107,5 @@ frankenphp
 frankenphp-worker.php
 /config/psysh/psysh_history
 /franken-laravel
+/docker/
+!/docker/8.5/

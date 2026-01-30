@@ -9,7 +9,7 @@ The Laravel Boost guidelines are specifically curated by Laravel maintainers for
 
 This application is a Laravel application and its main Laravel ecosystems package & versions are below. You are an expert with them all. Ensure you abide by these specific packages & versions.
 
-- php - 8.4.16
+- php - 8.5
 - laravel/framework (LARAVEL) - v12
 - laravel/octane (OCTANE) - v2
 - laravel/prompts (PROMPTS) - v0
@@ -22,6 +22,15 @@ This application is a Laravel application and its main Laravel ecosystems packag
 - rector/rector (RECTOR) - v2
 - prettier (PRETTIER) - v3
 - tailwindcss (TAILWINDCSS) - v4
+
+## SBOM Maintenance & Updates
+
+- You MUST keep the Foundational Context SBOM (above) up to date when dependencies change.
+- Proactively check for version mismatches between CLAUDE.md and actual installed versions.
+- When the user runs `composer update` or `npm update`, verify the SBOM reflects the new versions.
+- Suggest updates when major new versions are released for critical packages (Laravel, PHP, Octane, etc.).
+- When suggesting updates, check for breaking changes and compatibility issues (e.g., FrankenPHP binary availability for new PHP versions).
+- Update this file immediately when packages are added, removed, or upgraded.
 
 ## Skills Activation
 
