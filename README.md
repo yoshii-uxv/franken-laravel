@@ -53,7 +53,10 @@
 8. **Install Playwright for browser testing (optional)**
    ```bash
    # Install Playwright browsers
-   ./vendor/bin/sail npm install playwright@latest
+   sail root-shell
+   
+   # Inside container
+   npm install playwright@latest && npx playwright install-deps chromium && npx playwright install
 
    # Install system dependencies as root
    ./vendor/bin/sail root-shell
